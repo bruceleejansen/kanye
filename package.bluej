@@ -1,11 +1,17 @@
 #BlueJ package file
+dependency1.from=kanye
+dependency1.to=paddle
+dependency1.type=UsesDependency
+dependency2.from=kanye
+dependency2.to=Ball
+dependency2.type=UsesDependency
 objectbench.height=76
 objectbench.width=668
 package.editor.height=400
 package.editor.width=560
 package.editor.x=30
 package.editor.y=30
-package.numDependencies=0
+package.numDependencies=2
 package.numTargets=3
 package.showExtends=true
 package.showUses=true

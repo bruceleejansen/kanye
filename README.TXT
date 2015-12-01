@@ -4,9 +4,9 @@ Tell the reader (someone who does not know anything about this project)
 all he/she needs to know. The comments should usually include at least:
 ------------------------------------------------------------------------
 
-PROJECT TITLE:
-PURPOSE OF PROJECT:
-VERSION or DATE:
-HOW TO START THIS PROJECT:
-AUTHORS:
-USER INSTRUCTIONS:
+PROJECT TITLE: kanyezone
+PURPOSE OF PROJECT: get good grade
+VERSION or DATE: 2015.12.1
+HOW TO START THIS PROJECT: you tell me
+AUTHORS: Lee J and the Don Jon
+USER INSTRUCTIONS: frick urself
