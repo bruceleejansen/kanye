@@ -11,6 +11,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     ArrayList<Face>faces = new ArrayList();
     int manyfaces = 1;
     int vplus = 0;
+    boolean leftmove = false;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
@@ -36,6 +37,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 t.sleep(12);
                 for(int i = 0; i < faces.size(); i++){
                     faces.get(i).move(getHeight(), getWidth());
+                }
+                for(int i = 0; i < paddles.length; i++){
+                    if(leftmove == true){
+                        
+                    }
                 }
             }
         }catch (InterruptedException e) {}
@@ -74,9 +80,14 @@ public class kanye extends JApplet implements Runnable, KeyListener
     }
 
     public void keyPressed(KeyEvent e){
+        if (e.getKeyChar() == 'a'){
+            leftmove = true;
+        }
     }
 
     public void keyReleased(KeyEvent e){
-
+        if (e.getKeyChar() == 'a'){
+            leftmove = false;
+        }
     }
 }

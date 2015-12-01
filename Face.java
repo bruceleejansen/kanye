@@ -4,6 +4,8 @@ public class Face{
         x=(Math.random())*50;
         y=(Math.random())*500;
         v=(Math.random())*5+vplus;
+        v=(Math.random())*5 + vplus;
+
         theta=(Math.random())*.7+.2;
     }
 
@@ -20,6 +22,6 @@ public class Face{
             if (y <=1) y = 2;
             else if (y >= height) y = height-1;
         }
-        
+
     }
 }
