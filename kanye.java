@@ -10,23 +10,30 @@ public class kanye extends JApplet implements Runnable, KeyListener
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
     int manyfaces = 1;
+    int vplus = 0;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
         paddles[0] = new paddle (250,250);
         for(int i = 0; i < manyfaces; i++) {
-            faces.add(new Face());
+            faces.add(new Face(vplus));
         }
         t = new Thread(this);
         resize(500,500);
         t.start();
     }
 
+    public void newFace() {
+        for (int i = 0; i < manyfaces; i++) {
+            faces.add(new Face(vplus));
+        }
+    }
+    
     public void run(){
         try{
             while (true){
                 repaint();
-                t.sleep(50);
+                t.sleep(12);
                 for(int i = 0; i < faces.size(); i++){
                     faces.get(i).move(getHeight(), getWidth());
                 }
@@ -55,7 +62,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
         }
         for(int i = 0; i < paddles.length; i++){
-            g.fillOval(paddles[i].m, paddles[i].n, paddles[i].width, paddles[i].length);
+            g.fillOval((int)(paddles[i].x)
+            , (int)(paddles[i].y)
+            , (int)(paddles[i].m)
+            , (int)(paddles[i].n));
         }
     }
 

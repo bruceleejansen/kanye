@@ -1,18 +1,20 @@
 public class paddle{
-    int m;
-    int n;
-    int width;
-    int length;
-    paddle(int x, int y){
-        m = x;
-        n = y;
-        width = 20;
-        length = 20;
+    double x;
+    double y;
+    double m;//width
+    double n;//height
+    double theta = 1;
+    double r = 1;
+    paddle(double x1, double y1){
+        x = x1;
+        y = y1;
+        m = 20;
+        n = 20;
     }
-    public void movePaddle(int xmove, int ymove, double theta) {
-        m += xmove;
-        n += ymove;
-        
+    public void move() {
+        theta = theta + .1;
+        x = m + r * Math.cos(theta);
+        y = n + r * Math.cos(theta);
     }
    
 }
