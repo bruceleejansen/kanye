@@ -29,7 +29,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
             faces.add(new Face(vplus));
         }
     }
-    
+
     public void run(){
         try{
             while (true){
@@ -40,7 +40,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 }
                 for(int i = 0; i < paddles.length; i++){
                     if(leftmove == true){
-                        
+
                     }
                 }
             }
@@ -87,7 +87,8 @@ public class kanye extends JApplet implements Runnable, KeyListener
 
     public void keyReleased(KeyEvent e){
         if (e.getKeyChar() == 'a'){
-            leftmove = false;
+            leftmove = true;
         }
+
     }
 }
