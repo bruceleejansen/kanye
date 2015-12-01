@@ -29,11 +29,24 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 for(int i = 0; i < balls.size(); i++){
                     balls.get(i).move();
                 }
-            }catch (InterruptedException e) {}
+            }
+        }catch (InterruptedException e) {}
         repaint();
     }
 
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
+        Graphics offScreenG;
+        Image offScreenI = null;
+
+        offScreenI = createImage(getWidth(), getHeight());
+        offScreenG = offScreenI.getGraphics();
+
+        subpaint(offScreenG);
+
+        g.drawImage(offScreenI, 0, 0, this);
+    }
+
+    public void subpaint(Graphics g){
         g.setColor(Color.white);
         g.fillRect(0,0,500,500);
         g.setColor(Color.black);
