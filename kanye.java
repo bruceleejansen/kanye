@@ -6,16 +6,17 @@ import java.awt.event.*;
 public class kanye extends JApplet implements Runnable, KeyListener
 {
     Thread t;
-    paddle []paddles = new paddle[1];
+    Paddle []paddles = new Paddle[1];
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
     int manyfaces = 1;
     int vplus = 0;
     boolean leftmove = false;
+    boolean rightmove = false;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
-        paddles[0] = new paddle (250,250);
+        paddles[0] = new Paddle(250, 250);
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus));
         }
@@ -40,7 +41,12 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 }
                 for(int i = 0; i < paddles.length; i++){
                     if(leftmove == true){
-
+                        paddles[i].theta -= .05;
+                        paddles[i].movePaddle();
+                    }
+                    if(rightmove == true){
+                        paddles[i].theta += .05;
+                        paddles[i].movePaddle();
                     }
                 }
             }
@@ -68,10 +74,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
         }
         for(int i = 0; i < paddles.length; i++){
+            g.setColor(Color.cyan);
             g.fillOval((int)(paddles[i].x)
             , (int)(paddles[i].y)
-            , (int)(paddles[i].m)
-            , (int)(paddles[i].n));
+            , 20
+            , 20);
         }
     }
 
@@ -83,11 +90,17 @@ public class kanye extends JApplet implements Runnable, KeyListener
         if (e.getKeyChar() == 'a'){
             leftmove = true;
         }
+        if (e.getKeyChar() == 'd') {
+            rightmove = true;
+        }
     }
 
     public void keyReleased(KeyEvent e){
         if (e.getKeyChar() == 'a'){
-            leftmove = true;
+            leftmove = false;
+        }
+        if (e.getKeyChar() == 'd') {
+            rightmove = false;
         }
 
     }
