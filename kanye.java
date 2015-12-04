@@ -76,11 +76,16 @@ public class kanye extends JApplet implements Runnable, KeyListener
             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
         }
         for(int i = 0; i < paddles.length; i++){
+            g.setColor(Color.gray);
+            g.drawOval( (int)(paddles[i].x) - 1
+                , (int)(paddles[i].y) - 1
+                , 20
+                , 20);
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x)
                 , (int)(paddles[i].y)
-                , 20
-                , 20);
+                , 22
+                , 22);
         }
         for (int i = 0; i < goals.length; i++){
             g.setColor(Color.red);
