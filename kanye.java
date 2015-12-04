@@ -93,6 +93,9 @@ public class kanye extends JApplet implements Runnable, KeyListener
         if (e.getKeyChar() == 'd') {
             rightmove = true;
         }
+        if (e.getKeyChar() == 'j') {
+            
+        }
     }
 
     public void keyReleased(KeyEvent e){
