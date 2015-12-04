@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=x1\ y1
-comment0.target=Paddle(double,\ double)
+comment0.params=x1\ y1\ radius
+comment0.target=Paddle(double,\ double,\ double)
 comment1.params=
 comment1.target=void\ movePaddle()
 numComments=2

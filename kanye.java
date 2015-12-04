@@ -7,6 +7,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
 {
     Thread t;
     Paddle []paddles = new Paddle[1];
+    Goal []goals = new Goal[1];
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
     int manyfaces = 1;
@@ -16,7 +17,8 @@ public class kanye extends JApplet implements Runnable, KeyListener
     public void init(){
         setFocusable(true);
         addKeyListener(this);
-        paddles[0] = new Paddle(250, 250);
+        paddles[0] = new Paddle(150, 250, (double)(getHeight())/4);
+        goals[0] = new Goal(getWidth()/2, getHeight()/2);
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus));
         }
@@ -75,10 +77,17 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
-            g.fillOval((int)(paddles[i].x)
-            , (int)(paddles[i].y)
-            , 20
-            , 20);
+            g.fillOval( (int)(paddles[i].x)
+                , (int)(paddles[i].y)
+                , 20
+                , 20);
+        }
+        for (int i = 0; i < goals.length; i++){
+            g.setColor(Color.red);
+            g.fillOval( (int)(goals[i].x) - goals[i].radius
+                , (int)(goals[i].y) - goals[i].radius
+                , (int)(goals[i].radius) * 2
+                , (int)(goals[i].radius) * 2);
         }
     }
 
@@ -94,7 +103,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
             rightmove = true;
         }
         if (e.getKeyChar() == 'j') {
-            
+            for (int i = 0; i < paddles.length; i++) {
+                paddles[i].theta += Math.PI;
+                paddles[i].movePaddle();
+            }
         }
     }
 
