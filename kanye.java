@@ -15,6 +15,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     int gradius = 40;
     boolean leftmove = false;
     boolean rightmove = false;
+    boolean loseScreen = false;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
@@ -50,10 +51,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             paddles[j].theta += .05;
                             paddles[j].movePaddle();
                         }
-                        if(faces.get(i).x+10 >= paddles[j].x 
-                        && faces.get(i).x <= paddles[j].x+30
-                        && faces.get(i).y+10 >= paddles[j].y
-                        && faces.get(i).y <= paddles[j].y+30){
+                        if(faces.get(i).x+10 >= paddles[j].x-15 
+                        && faces.get(i).x <= paddles[j].x+15
+                        && faces.get(i).y+10 >= paddles[j].y-15
+                        && faces.get(i).y <= paddles[j].y+15){
                             faces.remove(i);
                             manyfaces--;
                             if (manyfaces == 0){
@@ -61,6 +62,13 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             }
                             manyfaces++;
                             gradius += 5;
+                        }
+                        if(faces.get(i).x+10 >= goals[0].x-38
+                        && faces.get(i).x <= goals[0].x+38
+                        && faces.get(i).y+10 >= goals[0].y-38
+                        && faces.get(i).y <= goals[0].y+38){
+                            faces.remove(i);
+                            loseScreen = true;
                         }
                     }
 
@@ -108,6 +116,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
             , (int)(goals[i].y) - goals[i].radius
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
+        }
+        if (loseScreen == true){
+            g.setColor(Color.black);
+            g.drawString("You Lose", 100,100);
         }
     }
 

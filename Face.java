@@ -6,7 +6,7 @@ public class Face{
         v=(Math.random())+3;
         //v=(Math.random())*5 + vplus;
 
-        theta=(Math.random())*.3+.6;
+        theta=(Math.random()) * (500 - y) + (50 - x);
     }
 
     public void move(int height, int width){
