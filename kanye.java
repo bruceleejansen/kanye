@@ -17,7 +17,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     public void init(){
         setFocusable(true);
         addKeyListener(this);
-        paddles[0] = new Paddle(150, 250, (double)(getHeight())/4);
+        paddles[0] = new Paddle(225, 250, (double)(getHeight())/4);
         goals[0] = new Goal(getWidth()/2, getHeight()/2);
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus));
@@ -39,18 +39,31 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 repaint();
                 t.sleep(12);
                 for(int i = 0; i < faces.size(); i++){
-                    faces.get(i).move(getHeight(), getWidth());
-                }
-                for(int i = 0; i < paddles.length; i++){
-                    if(leftmove == true){
-                        paddles[i].theta -= .05;
-                        paddles[i].movePaddle();
+                    for(int j = 0; j < paddles.length; j++){
+                        faces.get(i).move(getHeight(), getWidth());
+                        if(leftmove == true){
+                            paddles[j].theta -= .05;
+                            paddles[j].movePaddle();
+                        }
+                        if(rightmove == true){
+                            paddles[j].theta += .05;
+                            paddles[j].movePaddle();
+                        }
+                        if(faces.get(i).x+10 >= paddles[j].x 
+                        && faces.get(i).x <= paddles[j].x+30
+                        && faces.get(i).y+10 >= paddles[j].y
+                        && faces.get(i).y <= paddles[j].y+30){
+                            faces.remove(i);
+                            manyfaces--;
+                            if (manyfaces == 0){
+                                faces.add(new Face(vplus));
+                            }
+                            manyfaces++;
+                        }
                     }
-                    if(rightmove == true){
-                        paddles[i].theta += .05;
-                        paddles[i].movePaddle();
-                    }
+
                 }
+
             }
         }catch (InterruptedException e) {}
         repaint();
@@ -76,23 +89,23 @@ public class kanye extends JApplet implements Runnable, KeyListener
             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
         }
         for(int i = 0; i < paddles.length; i++){
-            g.setColor(Color.gray);
-            g.drawOval( (int)(paddles[i].x) - 1
-                , (int)(paddles[i].y) - 1
-                , 20
-                , 20);
             g.setColor(Color.cyan);
-            g.fillOval( (int)(paddles[i].x)
-                , (int)(paddles[i].y)
-                , 22
-                , 22);
+            g.fillOval( (int)(paddles[i].x) - 15
+            , (int)(paddles[i].y) - 15
+            , 30
+            , 30);
+            //g.setColor(Color.cyan);
+            //g.fillOval( (int)(paddles[i].x)
+            //    , (int)(paddles[i].y)
+            //    , 22
+            //    , 22);
         }
         for (int i = 0; i < goals.length; i++){
             g.setColor(Color.red);
             g.fillOval( (int)(goals[i].x) - goals[i].radius
-                , (int)(goals[i].y) - goals[i].radius
-                , (int)(goals[i].radius) * 2
-                , (int)(goals[i].radius) * 2);
+            , (int)(goals[i].y) - goals[i].radius
+            , (int)(goals[i].radius) * 2
+            , (int)(goals[i].radius) * 2);
         }
     }
 
