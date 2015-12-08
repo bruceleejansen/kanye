@@ -35,11 +35,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
         t.start();
     }
 
-//     public void newFace() {
-//         for (int i = 0; i < manyfaces; i++) {
-//             faces.add(new Face(vplus));
-//         }
-//     }
+    //     public void newFace() {
+    //         for (int i = 0; i < manyfaces; i++) {
+    //             faces.add(new Face(vplus));
+    //         }
+    //     }
 
     public void run(){
         try{
@@ -166,6 +166,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
         //         for(int i = 0; i < faces.size(); i++){
         //             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
         //         }
+        g.setColor(Color.black);
+        g.drawString("Don't let Sam into his zone!",165,50);
+        g.drawString("'a' and 'd' to move", 192,70);
+        g.drawString("'j' to jump across the zone",167,90);
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
@@ -179,15 +183,17 @@ public class kanye extends JApplet implements Runnable, KeyListener
             //    , 22);
         }
         for (int i = 0; i < goals.length; i++){
+
             g.setColor(Color.red);
             g.fillOval( (int)(goals[i].x) - goals[i].radius
             , (int)(goals[i].y) - goals[i].radius
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
         }
+        g.setColor(Color.black);
+        g.drawString("Zone",235,253);
         if (loseScreen == true){
-            g.setColor(Color.black);
-            g.drawString("You Lose", 100,100);
+            g.drawString("You Lose!", 220,130);
         }
         showStatus("Debug state: " + debug);
     }

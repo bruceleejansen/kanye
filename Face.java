@@ -3,7 +3,7 @@ public class Face{
     Face(int vplus){
         x=(Math.random())*50;
         y=(Math.random())*500;
-        v=(Math.random())+3;
+        v=(Math.random())+3+vplus;
         //v=(Math.random())*5 + vplus;
 
         theta=(Math.random()) * (500 - y) + (50 - x);
