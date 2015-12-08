@@ -12,13 +12,14 @@ public class kanye extends JApplet implements Runnable, KeyListener
     ArrayList<Face>faces = new ArrayList();
     int manyfaces = 1;
     int vplus = 0;
+    int gradius = 40;
     boolean leftmove = false;
     boolean rightmove = false;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
-        paddles[0] = new Paddle(225, 250, (double)(getHeight())/4);
-        goals[0] = new Goal(getWidth()/2, getHeight()/2);
+        paddles[0] = new Paddle(225, 250, (double)(gradius + 20));
+        goals[0] = new Goal(getWidth()/2, getHeight()/2,gradius);
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus));
         }
@@ -59,6 +60,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                                 faces.add(new Face(vplus));
                             }
                             manyfaces++;
+                            gradius += 5;
                         }
                     }
 

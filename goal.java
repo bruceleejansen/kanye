@@ -1,9 +1,10 @@
 public class Goal{
     int x;
     int y;
-    int radius = 40;
-    Goal(int midx, int midy){
+    int radius;
+    Goal(int midx, int midy, int gradius){
         x = midx;
         y = midy;
+        radius = gradius;
     }
 }
