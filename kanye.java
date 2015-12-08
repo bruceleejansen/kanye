@@ -18,13 +18,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
     int gradius = 40;
     boolean leftmove = false;
     boolean rightmove = false;
-<<<<<<< Updated upstream
     boolean loseScreen = false;
-=======
     int samboy = 1;
     String debug = "";
     Random r = new Random();
->>>>>>> Stashed changes
     public void init(){
         setFocusable(true);
         addKeyListener(this);
@@ -38,11 +35,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
         t.start();
     }
 
-    public void newFace() {
-        for (int i = 0; i < manyfaces; i++) {
-            faces.add(new Face(vplus));
-        }
-    }
+//     public void newFace() {
+//         for (int i = 0; i < manyfaces; i++) {
+//             faces.add(new Face(vplus));
+//         }
+//     }
 
     public void run(){
         try{
@@ -71,7 +68,9 @@ public class kanye extends JApplet implements Runnable, KeyListener
                                 samboy = r.nextInt() * 8;
                             }
                             manyfaces++;
-                            gradius += 5;
+                            goals[0].radius += 5;
+                            paddles[j].r += 5;
+                            vplus += 1;
                         }
                         if(faces.get(i).x+10 >= goals[0].x-38
                         && faces.get(i).x <= goals[0].x+38
@@ -106,7 +105,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         g.fillRect(0,0,500,500);
         if (samboy == 1) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/hat.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/hat.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -114,7 +113,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         if (samboy == 2) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/charlie.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/charlie.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -122,7 +121,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         if (samboy == 3) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/dennis.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/dennis.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -130,7 +129,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         if (samboy == 4) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/nolan.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/nolan.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -138,7 +137,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         if (samboy == 5) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/poor.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/poor.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -146,7 +145,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         if (samboy == 6) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/fog.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/fog.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -154,7 +153,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
         if (samboy == 7) {try
             {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/happy.jpg"));
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/happy.png"));
             } catch (Exception e)
             {
                 e.printStackTrace(); debug += "Fix ";
@@ -186,14 +185,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
         }
-<<<<<<< Updated upstream
         if (loseScreen == true){
             g.setColor(Color.black);
             g.drawString("You Lose", 100,100);
         }
-=======
         showStatus("Debug state: " + debug);
->>>>>>> Stashed changes
     }
 
     public void keyTyped(KeyEvent e){
