@@ -1,7 +1,9 @@
-import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.*;
+import javax.imageio.*;
+import java.io.*;
 
 public class kanye extends JApplet implements Runnable, KeyListener
 {
@@ -10,12 +12,19 @@ public class kanye extends JApplet implements Runnable, KeyListener
     Goal []goals = new Goal[1];
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
+    Image sammy;
     int manyfaces = 1;
     int vplus = 0;
     int gradius = 40;
     boolean leftmove = false;
     boolean rightmove = false;
+<<<<<<< Updated upstream
     boolean loseScreen = false;
+=======
+    int samboy = 1;
+    String debug = "";
+    Random r = new Random();
+>>>>>>> Stashed changes
     public void init(){
         setFocusable(true);
         addKeyListener(this);
@@ -59,6 +68,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             manyfaces--;
                             if (manyfaces == 0){
                                 faces.add(new Face(vplus));
+                                samboy = r.nextInt() * 8;
                             }
                             manyfaces++;
                             gradius += 5;
@@ -94,10 +104,69 @@ public class kanye extends JApplet implements Runnable, KeyListener
     public void subpaint(Graphics g){
         g.setColor(Color.white);
         g.fillRect(0,0,500,500);
-        g.setColor(Color.black);
-        for(int i = 0; i < faces.size(); i++){
-            g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
+        if (samboy == 1) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/hat.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
         }
+        if (samboy == 2) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/charlie.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
+        }
+        if (samboy == 3) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/dennis.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
+        }
+        if (samboy == 4) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/nolan.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
+        }
+        if (samboy == 5) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/poor.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
+        }
+        if (samboy == 6) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/fog.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
+        }
+        if (samboy == 7) {try
+            {
+                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/happy.jpg"));
+            } catch (Exception e)
+            {
+                e.printStackTrace(); debug += "Fix ";
+            }
+        }
+        for (int i = 0; i < faces.size(); i++) {
+            g.drawImage(sammy, (int)(faces.get(i).x), (int)(faces.get(i).y), this);
+        }
+        //         g.setColor(Color.black); //old faces
+        //         for(int i = 0; i < faces.size(); i++){
+        //             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
+        //         }
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
@@ -117,10 +186,14 @@ public class kanye extends JApplet implements Runnable, KeyListener
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
         }
+<<<<<<< Updated upstream
         if (loseScreen == true){
             g.setColor(Color.black);
             g.drawString("You Lose", 100,100);
         }
+=======
+        showStatus("Debug state: " + debug);
+>>>>>>> Stashed changes
     }
 
     public void keyTyped(KeyEvent e){
