@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.imageio.*;
 import java.io.*;
+import javax.sound.sampled.*;
 
 public class kanye extends JApplet implements Runnable, KeyListener
 {
@@ -24,6 +25,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     Random r = new Random();
     Random g = new Random();
     int a = 0;
+    int sound = 0;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
@@ -37,12 +39,6 @@ public class kanye extends JApplet implements Runnable, KeyListener
         t.start();
     }
 
-    //     public void newFace() {
-    //         for (int i = 0; i < manyfaces; i++) {
-    //             faces.add(new Face(vplus));
-    //         }
-    //     }
-
     public void run(){
         try{
             while (true){
@@ -52,11 +48,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
                     for(int j = 0; j < paddles.length; j++){
                         faces.get(i).move(getHeight(), getWidth());
                         if(leftmove == true){
-                            paddles[j].theta -= .05;
+                            paddles[j].theta -= .07;
                             paddles[j].movePaddle();
                         }
                         if(rightmove == true){
-                            paddles[j].theta += .05;
+                            paddles[j].theta += .07;
                             paddles[j].movePaddle();
                         }
                         if(faces.get(i).x+10 >= paddles[j].x-15 
@@ -68,7 +64,6 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             if (manyfaces == 0){
                                 samboy = r.nextInt() * 8;
                                 faces.add(new Face(vplus,a));
-                                
                             }
                             a = g.nextInt();
                             manyfaces++;
@@ -230,4 +225,29 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }
 
     }
+
+    public void makeSound(){
+        while (sound != -1){
+
+            try {
+                File yourFile = "";
+                AudioInputStream stream;
+                AudioFormat format;
+                DataLine.Info info;
+                Clip clip;
+
+                stream = AudioSystem.getAudioInputStream(yourFile);
+                format = stream.getFormat();
+                info = new DataLine.Info(Clip.class, format);
+                clip = (Clip) AudioSystem.getLine(info);
+                clip.open(stream);
+                clip.start();
+            }
+            catch (Exception e) {
+                //whatevers
+            }
+        }
+
+    }
+
 }
