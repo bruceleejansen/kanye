@@ -20,19 +20,19 @@ public class kanye extends JApplet implements Runnable, KeyListener
     boolean leftmove = false;
     boolean rightmove = false;
     boolean loseScreen = false;
-    int samboy = 1;
     String debug = "";
     Random r = new Random();
-    Random g = new Random();
+    int samboy = r.nextInt(7)+1;
     int a = 0;
     int sound = 0;
-    AudioClip whistle;
+    AudioClip song;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
         paddles[0] = new Paddle(225, 250, (double)(gradius + 20));
         goals[0] = new Goal(getWidth()/2, getHeight()/2,gradius);
-        whistle = getAudioClip(getDocumentBase(), "Yamaha-TG100-Whistle-C5.wav");
+        song = getAudioClip(getDocumentBase(), "imagod.wav");
+        song.play();
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus,a));
         }
@@ -64,11 +64,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             faces.remove(i);
                             manyfaces--;
                             if (manyfaces == 0){
-                                samboy = r.nextInt() * 8;
+                                samboy = r.nextInt(7)+1;
                                 faces.add(new Face(vplus,a));
-                                whistle.play();
                             }
-                            a = g.nextInt();
+                            a = r.nextInt();
                             manyfaces++;
                             goals[0].radius += 5;
                             paddles[j].r += 5;
@@ -86,6 +85,13 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 }
 
             }
+        }catch (InterruptedException e) {}
+        try{
+            while (true){
+                song.play();
+                t.sleep(31000);
+            }
+            
         }catch (InterruptedException e) {}
         repaint();
     }
@@ -197,7 +203,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         if (loseScreen == true){
             g.drawString("You Lose!", 220,130);
         }
-        showStatus("Debug state: " + debug);
+        showStatus("Samboy: " + samboy);
     }
 
     public void keyTyped(KeyEvent e){
