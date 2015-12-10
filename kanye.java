@@ -22,13 +22,15 @@ public class kanye extends JApplet implements Runnable, KeyListener
     int samboy = 1;
     String debug = "";
     Random r = new Random();
+    Random g = new Random();
+    int a = 0;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
         paddles[0] = new Paddle(225, 250, (double)(gradius + 20));
         goals[0] = new Goal(getWidth()/2, getHeight()/2,gradius);
         for(int i = 0; i < manyfaces; i++) {
-            faces.add(new Face(vplus));
+            faces.add(new Face(vplus,a));
         }
         t = new Thread(this);
         resize(500,500);
@@ -64,9 +66,11 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             faces.remove(i);
                             manyfaces--;
                             if (manyfaces == 0){
-                                faces.add(new Face(vplus));
                                 samboy = r.nextInt() * 8;
+                                faces.add(new Face(vplus,a));
+                                
                             }
+                            a = g.nextInt();
                             manyfaces++;
                             goals[0].radius += 5;
                             paddles[j].r += 5;

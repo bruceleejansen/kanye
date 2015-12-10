@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=vplus
-comment0.target=Face(int)
+comment0.params=vplus\ a
+comment0.target=Face(int,\ int)
 comment1.params=height\ width
 comment1.target=void\ move(int,\ int)
 numComments=2

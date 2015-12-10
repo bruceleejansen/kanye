@@ -1,12 +1,21 @@
+import java.util.*;
 public class Face{
     double x, y, v, theta;
-    Face(int vplus){
-        x=(Math.random())*50;
-        y=(Math.random())*500;
-        v=(Math.random())+3+vplus;
-        //v=(Math.random())*5 + vplus;
-
-        theta=(Math.random()) * (500 - y) + (50 - x);
+    int b;
+    Face(int vplus, int a){
+        b=a;
+        if (a == 0){
+            x=(Math.random())*50;
+            y=(Math.random())*500;
+            v=(Math.random())+3+vplus;
+            theta=(Math.random()) * (500 - y) + (50 - x);
+        }
+        else{
+            x=500-((Math.random())*50);
+            y=(Math.random())*500;
+            v=(Math.random())+3+vplus;
+            theta=(Math.random()) * (500 - y) + (50 - x);
+        }
     }
 
     public void move(int height, int width){
