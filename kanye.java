@@ -46,7 +46,6 @@ public class kanye extends JApplet implements Runnable, KeyListener
             while (true){
                 repaint();
                 t.sleep(10);
-                whistle.play();
                 for(int i = 0; i < faces.size(); i++){
                     for(int j = 0; j < paddles.length; j++){
                         faces.get(i).move(getHeight(), getWidth());
@@ -67,6 +66,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             if (manyfaces == 0){
                                 samboy = r.nextInt() * 8;
                                 faces.add(new Face(vplus,a));
+                                whistle.play();
                             }
                             a = g.nextInt();
                             manyfaces++;
@@ -84,7 +84,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                     }
 
                 }
-                
+
             }
         }catch (InterruptedException e) {}
         repaint();
@@ -229,5 +229,4 @@ public class kanye extends JApplet implements Runnable, KeyListener
 
     }
 
-    
 }
