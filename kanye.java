@@ -43,6 +43,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     }
 
     public void newface(){
+        if (hardmode == true) manyfaces = 300;
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus,a));
         }
