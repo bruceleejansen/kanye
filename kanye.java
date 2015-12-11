@@ -24,6 +24,8 @@ public class kanye extends JApplet implements Runnable, KeyListener
     int samboy = r.nextInt(7)+1;
     int a = 0;
     int sound = 0;
+    boolean hardmode = false;
+    int score = 0;
     AudioClip song;
     AudioClip whistle;
     public void init(){
@@ -34,12 +36,16 @@ public class kanye extends JApplet implements Runnable, KeyListener
         song = getAudioClip(getDocumentBase(), "imagod.wav");
         whistle = getAudioClip(getDocumentBase(), "ooo.wav");
         song.play();
-        for(int i = 0; i < manyfaces; i++) {
-            faces.add(new Face(vplus,a));
-        }
+        newface();
         t = new Thread(this);
         resize(500,500);
         t.start();
+    }
+
+    public void newface(){
+        for(int i = 0; i < manyfaces; i++) {
+            faces.add(new Face(vplus,a));
+        }
     }
 
     public void run(){
@@ -58,26 +64,26 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             paddles[j].theta += .07;
                             paddles[j].movePaddle();
                         }
-                        if(faces.get(i).x+10 >= paddles[j].x-15 
+                        if(faces.get(i).x+60 >= paddles[j].x-15 
                         && faces.get(i).x <= paddles[j].x+15
-                        && faces.get(i).y+10 >= paddles[j].y-15
+                        && faces.get(i).y+60 >= paddles[j].y-15
                         && faces.get(i).y <= paddles[j].y+15){
                             faces.remove(i);
                             manyfaces--;
                             if (manyfaces == 0){
-                                samboy = r.nextInt(7)+1;
-                                faces.add(new Face(vplus,a));
+                                newface();
                                 whistle.play();
+                                score++;
                             }
                             a = r.nextInt();
                             manyfaces++;
-                            goals[0].radius += 5;
-                            paddles[j].r += 5;
-                            vplus += 1;
+                            //goals[0].radius += 5;
+                            //paddles[j].r += 5;
+                            vplus += 0.5;
                         }
-                        if(faces.get(i).x+10 >= goals[0].x-goals[0].radius
+                        if(faces.get(i).x+60 >= goals[0].x-goals[0].radius
                         && faces.get(i).x <= goals[0].x+goals[0].radius
-                        && faces.get(i).y+10 >= goals[0].y-goals[0].radius
+                        && faces.get(i).y+60 >= goals[0].y-goals[0].radius
                         && faces.get(i).y <= goals[0].y+goals[0].radius){
                             faces.remove(i);
                             loseScreen = true;
@@ -97,6 +103,13 @@ public class kanye extends JApplet implements Runnable, KeyListener
         repaint();
     }
 
+    public void clearScreen() {
+        loseScreen = false;
+        newface();
+        score = 0;
+        repaint();
+    }
+
     public void paint(Graphics g) {
         Graphics offScreenG;
         Image offScreenI = null;
@@ -110,62 +123,66 @@ public class kanye extends JApplet implements Runnable, KeyListener
     }
 
     public void subpaint(Graphics g){
-        g.setColor(Color.white);
+        if (hardmode == false)
+            g.setColor(Color.white);
+        else if (hardmode == true);
         g.fillRect(0,0,500,500);
-        if (samboy == 1) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/hat.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+        for (int i = 0; i < faces.size(); i++){
+            if (samboy == 1) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/hat.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
-        }
-        if (samboy == 2) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/charlie.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+            if (samboy == 2) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/charlie.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
-        }
-        if (samboy == 3) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/dennis.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+            if (samboy == 3) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/dennis.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
-        }
-        if (samboy == 4) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/nolan.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+            if (samboy == 4) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/nolan.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
-        }
-        if (samboy == 5) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/poor.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+            if (samboy == 5) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/poor.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
-        }
-        if (samboy == 6) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/fog.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+            if (samboy == 6) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/fog.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
-        }
-        if (samboy == 7) {try
-            {
-                sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/happy.png"));
-            } catch (Exception e)
-            {
-                e.printStackTrace(); debug += "Fix ";
+            if (samboy == 7) {try
+                {
+                    sammy = ImageIO.read(getClass().getClassLoader().getResource("sampics/happy.png"));
+                } catch (Exception e)
+                {
+                    e.printStackTrace(); debug += "Fix ";
+                }
             }
         }
         for (int i = 0; i < faces.size(); i++) {
@@ -179,6 +196,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         g.drawString("Don't let Sam into his zone!",165,50);
         g.drawString("'a' and 'd' to move", 192,70);
         g.drawString("'j' to jump across the zone",167,90);
+        g.drawString("Sams stopped: " + score, 200, 100);
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
@@ -208,20 +226,27 @@ public class kanye extends JApplet implements Runnable, KeyListener
     }
 
     public void keyTyped(KeyEvent e){
-
+        if (e.getKeyChar() == 'r') {
+            clearScreen();
+        }
+        if (e.getKeyChar() =='h') {
+            hardmode = !hardmode;
+        }
     }
 
     public void keyPressed(KeyEvent e){
-        if (e.getKeyChar() == 'a'){
-            leftmove = true;
-        }
-        if (e.getKeyChar() == 'd') {
-            rightmove = true;
-        }
-        if (e.getKeyChar() == 'j') {
-            for (int i = 0; i < paddles.length; i++) {
-                paddles[i].theta += Math.PI;
-                paddles[i].movePaddle();
+        if (loseScreen != true) {
+            if (e.getKeyChar() == 'a'){
+                leftmove = true;
+            }
+            if (e.getKeyChar() == 'd') {
+                rightmove = true;
+            }
+            if (e.getKeyChar() == 'j') {
+                for (int i = 0; i < paddles.length; i++) {
+                    paddles[i].theta += Math.PI;
+                    paddles[i].movePaddle();
+                }
             }
         }
     }
@@ -233,7 +258,5 @@ public class kanye extends JApplet implements Runnable, KeyListener
         if (e.getKeyChar() == 'd') {
             rightmove = false;
         }
-
     }
-
 }
