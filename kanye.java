@@ -16,7 +16,6 @@ public class kanye extends JApplet implements Runnable, KeyListener
     Image sammy;
     int manyfaces = 1;
     int vplus = 0;
-    int gradius = 40;
     boolean leftmove = false;
     boolean rightmove = false;
     boolean loseScreen = false;
@@ -26,12 +25,14 @@ public class kanye extends JApplet implements Runnable, KeyListener
     int a = 0;
     int sound = 0;
     AudioClip song;
+    AudioClip whistle;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
-        paddles[0] = new Paddle(225, 250, (double)(gradius + 20));
-        goals[0] = new Goal(getWidth()/2, getHeight()/2,gradius);
+        paddles[0] = new Paddle(225, 250, (double)(60));
+        goals[0] = new Goal(getWidth()/2, getHeight()/2,40);
         song = getAudioClip(getDocumentBase(), "imagod.wav");
+        whistle = getAudioClip(getDocumentBase(), "ooo.wav");
         song.play();
         for(int i = 0; i < manyfaces; i++) {
             faces.add(new Face(vplus,a));
@@ -66,6 +67,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             if (manyfaces == 0){
                                 samboy = r.nextInt(7)+1;
                                 faces.add(new Face(vplus,a));
+                                whistle.play();
                             }
                             a = r.nextInt();
                             manyfaces++;
@@ -73,10 +75,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             paddles[j].r += 5;
                             vplus += 1;
                         }
-                        if(faces.get(i).x+10 >= goals[0].x-38
-                        && faces.get(i).x <= goals[0].x+38
-                        && faces.get(i).y+10 >= goals[0].y-38
-                        && faces.get(i).y <= goals[0].y+38){
+                        if(faces.get(i).x+10 >= goals[0].x-goals[0].radius
+                        && faces.get(i).x <= goals[0].x+goals[0].radius
+                        && faces.get(i).y+10 >= goals[0].y-goals[0].radius
+                        && faces.get(i).y <= goals[0].y+goals[0].radius){
                             faces.remove(i);
                             loseScreen = true;
                         }
@@ -91,7 +93,6 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 song.play();
                 t.sleep(31000);
             }
-            
         }catch (InterruptedException e) {}
         repaint();
     }
