@@ -28,6 +28,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     int score = 0;
     AudioClip song;
     AudioClip whistle;
+    AudioClip foghorn;
     public void init(){
         setFocusable(true);
         addKeyListener(this);
@@ -35,6 +36,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         goals[0] = new Goal(getWidth()/2, getHeight()/2,40);
         song = getAudioClip(getDocumentBase(), "imagod.wav");
         whistle = getAudioClip(getDocumentBase(), "ooo.wav");
+        foghorn = getAudioClip(getDocumentBase(), "foghorn.wav");
         song.play();
         newface();
         t = new Thread(this);
@@ -58,6 +60,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                 for(int i = 0; i < faces.size(); i++){
                     for(int j = 0; j < paddles.length; j++){
                         faces.get(i).move(getHeight(), getWidth());
+                        if (faces.get(i).bounces >= 4) foghorn.play();
                         if(leftmove == true){
                             paddles[j].theta -= .07;
                             paddles[j].movePaddle();
@@ -108,7 +111,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
 
     public void clearScreen() {
         loseScreen = false;
-        faces.remove(0);
+        if (faces.size() > 0) faces.remove(0);
         samboy=r.nextInt(7)+1;
         a=r.nextInt();
         newface();
@@ -131,7 +134,8 @@ public class kanye extends JApplet implements Runnable, KeyListener
     public void subpaint(Graphics g){
         if (hardmode == false)
             g.setColor(Color.white);
-        else if (hardmode == true);
+        else if (hardmode == true)
+            g.setColor(Color.black);
         g.fillRect(0,0,500,500);
         for (int i = 0; i < faces.size(); i++){
             if (samboy == 1) {try

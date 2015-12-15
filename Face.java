@@ -35,7 +35,7 @@ public class Face{
             if (y <=1) y = 2;
             else if (y >= height) y = height-1;
         }
-        if (bounces >= 3) {
+        if (bounces > 4) {
             theta=(Math.random()) * (500 - y) + (50 - x);
             bounces = 0;
         }
