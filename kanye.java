@@ -14,6 +14,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
     Image sammy;
+    Image usc;
     int manyfaces = 1;
     int vplus = 0;
     boolean leftmove = false;
@@ -22,7 +23,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     String debug = "";
     Random r = new Random();
     int samboy = r.nextInt(7)+1;
-    int a = 0;
+    int a = 0;//sides
     int sound = 0;
     boolean hardmode = false;
     int score = 0;
@@ -37,6 +38,13 @@ public class kanye extends JApplet implements Runnable, KeyListener
         song = getAudioClip(getDocumentBase(), "imagod.wav");
         whistle = getAudioClip(getDocumentBase(), "ooo.wav");
         foghorn = getAudioClip(getDocumentBase(), "foghorn.wav");
+        try
+        {
+            usc = ImageIO.read(getClass().getClassLoader().getResource("usclogo.png"));
+        } catch (Exception e)
+        {
+            e.printStackTrace(); debug += "Fix ";
+        }
         song.play();
         newface();
         t = new Thread(this);
@@ -74,12 +82,12 @@ public class kanye extends JApplet implements Runnable, KeyListener
                         && faces.get(i).y+60 >= paddles[j].y-15
                         && faces.get(i).y <= paddles[j].y+15){
                             faces.remove(i);
+                            whistle.play();
                             manyfaces--;
                             if (manyfaces == 0){
                                 samboy = r.nextInt(7) + 1;
                                 manyfaces++;
                                 newface();
-                                whistle.play();
                                 score++;
                             }
                             a = r.nextInt();
@@ -206,7 +214,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         g.drawString("Don't let Sam into his zone!",165,50);
         g.drawString("'a' and 'd' to move", 192,70);
         g.drawString("'j' to jump across the zone",167,90);
-        g.drawString("Sams stopped: " + score, 200, 110);
+        g.drawString("Bounty earned: $" + score*500 , 195, 110);
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
@@ -220,15 +228,21 @@ public class kanye extends JApplet implements Runnable, KeyListener
             //    , 22);
         }
         for (int i = 0; i < goals.length; i++){
-
-            g.setColor(Color.red);
+            g.setColor(Color.black);//outline
+            g.fillOval( ((int)(goals[i].x) - goals[i].radius) - 3
+            , ((int)(goals[i].y) - goals[i].radius) - 3
+            , ((int)(goals[i].radius) * 2) + 6
+            , ((int)(goals[i].radius) * 2) + 6);
+            
+            g.setColor(Color.red);//goal
             g.fillOval( (int)(goals[i].x) - goals[i].radius
             , (int)(goals[i].y) - goals[i].radius
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
         }
+        g.drawImage(usc, (getWidth()/2) - 14, getHeight()/2 - 20, this);
         g.setColor(Color.black);
-        g.drawString("Zone",235,253);
+        //         g.drawString("Zone",235,253);
         if (loseScreen == true){
             g.drawString("You Lose!", 220,130);
         }
