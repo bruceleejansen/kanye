@@ -82,7 +82,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             a = r.nextInt();
                             //goals[0].radius += 5;
                             //paddles[j].r += 5;
-                            vplus += 0.5;
+                            vplus += 0.7;
                         }
                         if(faces.get(i).x+60 >= goals[0].x-goals[0].radius
                         && faces.get(i).x <= goals[0].x+goals[0].radius
@@ -108,6 +108,9 @@ public class kanye extends JApplet implements Runnable, KeyListener
 
     public void clearScreen() {
         loseScreen = false;
+        faces.remove(0);
+        samboy=r.nextInt(7)+1;
+        a=r.nextInt();
         newface();
         score = 0;
         repaint();
