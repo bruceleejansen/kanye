@@ -14,9 +14,8 @@ public class kanye extends JApplet implements Runnable, KeyListener
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
     Image sammy;
-    Image usc;
     int manyfaces = 1;
-    int vplus = 0;
+    int vplus;
     boolean leftmove = false;
     boolean rightmove = false;
     boolean loseScreen = false;
@@ -33,18 +32,12 @@ public class kanye extends JApplet implements Runnable, KeyListener
     public void init(){
         setFocusable(true);
         addKeyListener(this);
+        vplus = 0;
         paddles[0] = new Paddle(225, 250, (double)(60));
         goals[0] = new Goal(getWidth()/2, getHeight()/2,40);
         song = getAudioClip(getDocumentBase(), "imagod.wav");
         whistle = getAudioClip(getDocumentBase(), "ooo.wav");
         foghorn = getAudioClip(getDocumentBase(), "foghorn.wav");
-        try
-        {
-            usc = ImageIO.read(getClass().getClassLoader().getResource("usclogo.png"));
-        } catch (Exception e)
-        {
-            e.printStackTrace(); debug += "Fix ";
-        }
         song.play();
         newface();
         t = new Thread(this);
@@ -93,7 +86,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             a = r.nextInt();
                             //goals[0].radius += 5;
                             //paddles[j].r += 5;
-                            vplus += 0.7;
+                            vplus++;
                         }
                         if(faces.get(i).x+60 >= goals[0].x-goals[0].radius
                         && faces.get(i).x <= goals[0].x+goals[0].radius
@@ -240,7 +233,6 @@ public class kanye extends JApplet implements Runnable, KeyListener
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
         }
-        g.drawImage(usc, (getWidth()/2) - 14, getHeight()/2 - 20, this);
         g.setColor(Color.black);
         //         g.drawString("Zone",235,253);
         if (loseScreen == true){

@@ -9,13 +9,13 @@ public class Face{
         if (a == 0){
             x=(Math.random())*50;
             y=(Math.random())*500;
-            v=(Math.random())+3+vplus;
+            v=3+(0.7 * vplus);
             theta=(Math.random()) * (500 - y) + (50 - x);
         }
         else{
             x=500-((Math.random())*50);
             y=(Math.random())*500;
-            v=(Math.random())+3+vplus;
+            v=3+(0.7 * vplus);
             theta=(Math.random()) * (500 - y) + (50 - x);
         }
     }
