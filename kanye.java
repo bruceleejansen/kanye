@@ -72,12 +72,13 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             faces.remove(i);
                             manyfaces--;
                             if (manyfaces == 0){
+                                samboy = r.nextInt(7) + 1;
+                                manyfaces++;
                                 newface();
                                 whistle.play();
                                 score++;
                             }
                             a = r.nextInt();
-                            manyfaces++;
                             //goals[0].radius += 5;
                             //paddles[j].r += 5;
                             vplus += 0.5;
@@ -197,7 +198,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         g.drawString("Don't let Sam into his zone!",165,50);
         g.drawString("'a' and 'd' to move", 192,70);
         g.drawString("'j' to jump across the zone",167,90);
-        g.drawString("Sams stopped: " + score, 200, 100);
+        g.drawString("Sams stopped: " + score, 200, 110);
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
