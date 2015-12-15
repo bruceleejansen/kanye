@@ -14,6 +14,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     double v, theta;
     ArrayList<Face>faces = new ArrayList();
     Image sammy;
+    Image papa;
     int manyfaces = 1;
     int vplus;
     boolean leftmove = false;
@@ -38,6 +39,13 @@ public class kanye extends JApplet implements Runnable, KeyListener
         song = getAudioClip(getDocumentBase(), "imagod.wav");
         whistle = getAudioClip(getDocumentBase(), "ooo.wav");
         foghorn = getAudioClip(getDocumentBase(), "foghorn.wav");
+        try
+        {
+            papa = ImageIO.read(getClass().getClassLoader().getResource("john.png"));
+        } catch (Exception e)
+        {
+            e.printStackTrace(); debug += "Fix ";
+        }
         song.play();
         newface();
         t = new Thread(this);
@@ -103,8 +111,8 @@ public class kanye extends JApplet implements Runnable, KeyListener
         }catch (InterruptedException e) {}
         try{
             while (true){
-                song.play();
                 t.sleep(31000);
+                song.play();
             }
         }catch (InterruptedException e) {}
         repaint();
@@ -204,10 +212,10 @@ public class kanye extends JApplet implements Runnable, KeyListener
         //             g.fillOval((int)faces.get(i).x,(int)faces.get(i).y,10,10);
         //         }
         g.setColor(Color.black);
-        g.drawString("Don't let Sam into his zone!",165,50);
+        g.drawString("Don't let Sam eat the pizza!",165,50);
         g.drawString("'a' and 'd' to move", 192,70);
         g.drawString("'j' to jump across the zone",167,90);
-        g.drawString("Bounty earned: $" + score*500 , 195, 110);
+        g.drawString("Calories saved: " + score*290 , 195, 110);
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
@@ -226,13 +234,14 @@ public class kanye extends JApplet implements Runnable, KeyListener
             , ((int)(goals[i].y) - goals[i].radius) - 3
             , ((int)(goals[i].radius) * 2) + 6
             , ((int)(goals[i].radius) * 2) + 6);
-            
+
             g.setColor(Color.red);//goal
             g.fillOval( (int)(goals[i].x) - goals[i].radius
             , (int)(goals[i].y) - goals[i].radius
             , (int)(goals[i].radius) * 2
             , (int)(goals[i].radius) * 2);
         }
+        g.drawImage(papa, getWidth()/2 - 28, getHeight()/2 - 28, this);
         g.setColor(Color.black);
         //         g.drawString("Zone",235,253);
         if (loseScreen == true){
