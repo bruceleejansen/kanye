@@ -9,13 +9,13 @@ public class Face{
         if (a == 0){
             x=(Math.random())*50;
             y=(Math.random())*500;
-            v=3+(0.3 * vplus);
+            v=3+(0.3 * vplus) + (0.1 * bounces);
             theta=(Math.random()) * (500 - y) + (50 - x);
         }
         else{
             x=500-((Math.random())*50);
             y=(Math.random())*500;
-            v=3+(0.3 * vplus);
+            v=3+(0.3 * vplus) + (0.1 * bounces);
             theta=(Math.random()) * (500 - y) + (50 - x);
         }
     }
@@ -35,8 +35,8 @@ public class Face{
             if (y <=1) y = 2;
             else if (y >= height) y = height-1;
         }
-        if (bounces > 4) {
-            theta=(Math.random()) * (500 - y) + (50 - x);
+        if (bounces > 6) {
+            theta += 1;
             bounces = 0;
         }
     }

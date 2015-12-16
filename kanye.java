@@ -94,7 +94,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
                             a = r.nextInt();
                             //goals[0].radius += 5;
                             //paddles[j].r += 5;
-                            vplus++;
+                            //vplus++;
                         }
                         if(faces.get(i).x+60 >= goals[0].x-goals[0].radius
                         && faces.get(i).x <= goals[0].x+goals[0].radius
@@ -121,6 +121,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
     public void clearScreen() {
         loseScreen = false;
         if (faces.size() > 0) faces.remove(0);
+        vplus = 0;
         samboy=r.nextInt(7)+1;
         a=r.nextInt();
         newface();
@@ -215,7 +216,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         g.drawString("Don't let Sam eat the pizza!",165,50);
         g.drawString("'a' and 'd' to move", 192,70);
         g.drawString("'j' to jump across the zone",167,90);
-        g.drawString("Calories saved: " + score*290 , 195, 110);
+        g.drawString("Calories saved: " + score*2900 , 195, 110);
         for(int i = 0; i < paddles.length; i++){
             g.setColor(Color.cyan);
             g.fillOval( (int)(paddles[i].x) - 15
@@ -245,7 +246,7 @@ public class kanye extends JApplet implements Runnable, KeyListener
         g.setColor(Color.black);
         //         g.drawString("Zone",235,253);
         if (loseScreen == true){
-            g.drawString("You Lose!", 220,130);
+            g.drawString("You Lose! Press 'r' to restart", 166,130);
         }
         showStatus("Samboy: " + samboy);
     }
